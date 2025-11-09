@@ -1,0 +1,11 @@
+#login {
+    padding: 0.5rem;
+    height: fit-content;
+}
+
+#submit {
+    width: fit-content;
+    background-color: green;
+    color: white;
+    align-self: center
+}
