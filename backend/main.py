@@ -16,7 +16,9 @@ app = Flask(__name__)
 db_url = os.getenv("DATABASE_URL")
 frontend_dev = os.getenv("FRONTEND_DEV_URL")
 frontend_prod = os.getenv("FRONTEND_PROD_URL")
-
+print(db_url)
+print(frontend_dev)
+print(frontend_prod)
 # CORS configuration
 CORS(app, resources={
     r"/signup/*": {"origins": [frontend_dev, frontend_prod]},

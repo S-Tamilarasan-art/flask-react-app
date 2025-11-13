@@ -1,6 +1,11 @@
+from dotenv import load_dotenv
+import os
 
-from main import app  # Replace 'app' with the name of your main Flask app file if different
+# Load environment variables before anything else
+load_dotenv()
+
+from main import app  # Import AFTER .env is loaded
 
 if __name__ == "__main__":
-    
-    app.run()
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
