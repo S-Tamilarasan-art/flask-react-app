@@ -35,7 +35,7 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
     return response
 
-
+db = SQLAlchemy()
 db.init_app(app)
 
 
