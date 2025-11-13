@@ -36,7 +36,13 @@ CORS(app, resources={
 
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+print("DATABASE_URL:", os.getenv("DATABASE_URL"))
+print("MYSQL_URL:", os.getenv("MYSQL_URL"))
+print("MYSQLHOST:", os.getenv("MYSQLHOST"))
+print("MYSQLUSER:", os.getenv("MYSQLUSER"))
+print("MYSQLPASSWORD:", os.getenv("MYSQLPASSWORD"))
+print("MYSQLDATABASE:", os.getenv("MYSQLDATABASE"))
+print("MYSQLPORT:", os.getenv("MYSQLPORT"))
 
 @app.after_request
 def add_cors_headers(response):
