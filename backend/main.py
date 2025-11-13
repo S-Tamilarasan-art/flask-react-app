@@ -13,12 +13,20 @@ import os
 load_dotenv() 
 
 app = Flask(__name__)
-db_url = os.getenv("DATABASE_URL")
+
 frontend_dev = os.getenv("FRONTEND_DEV_URL")
 frontend_prod = os.getenv("FRONTEND_PROD_URL")
-print(db_url)
-print(frontend_dev)
-print(frontend_prod)
+db_url = os.getenv("DATABASE_URL") or os.getenv("MYSQL_URL")
+
+if not db_url:
+    # Manually build connection if Railway splits it
+    host = os.getenv("MYSQLHOST")
+    user = os.getenv("MYSQLUSER")
+    password = os.getenv("MYSQLPASSWORD")
+    dbname = os.getenv("MYSQLDATABASE")
+    port = os.getenv("MYSQLPORT", 3306)
+    if host and user and password and dbname:
+        db_url = f"mysql+pymysql://{user}:{password}@{host}:{port}/{dbname}"
 # CORS configuration
 CORS(app, resources={
     r"/signup/*": {"origins": [frontend_dev, frontend_prod]},
