@@ -1,95 +1,128 @@
+/* ---------------------------
+   DASHBOARD CONTAINER THEME
+----------------------------*/
 .dashboard-container {
   max-width: 500px;
   margin: 2rem auto;
-  padding: 4rem;
-  border: solid palevioletred;
-  background-color: pink;
-  border-radius: 5px;
-  box-shadow: 0 0 100px rgba(235, 175, 175, 0.951);
-  color: rgb(134, 46, 75);
+  padding: 3rem 2rem;
+
+  border: 2px solid rgba(255, 192, 203, 0.7);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 198, 213, 0.95) 0%,
+    rgba(230, 160, 175, 0.95) 45%,
+    rgba(200, 120, 150, 0.95) 100%
+  );
+
+  border-radius: 12px;
+  box-shadow: 0px 15px 45px rgba(255, 180, 200, 0.5);
+
+  color: #5a1f32;
+  font-family: "Segoe UI", sans-serif;
 }
 
+
+/* ---------------------------
+   TYPING EFFECT
+----------------------------*/
 .typing {
   display: inline-block;
-  font-family: monospace;
   font-size: 2rem;
-  overflow: hidden;
 
+  overflow: hidden;
   white-space: nowrap;
 
-  border-right: 3px solid pink;
+  border-right: 3px solid rgba(255, 255, 255, 0.9);
 
   width: 0;
-  animation: typing 2s steps(30, end) forwards,
-    blink 0.5s step-end 4 alternate;
+  animation:
+    typing 2s steps(30, end) forwards,
+    blink 0.5s step-end infinite alternate;
 }
 
 @keyframes typing {
-  from {
-    width: 0;
-  }
-
-  to {
-    width: 100%;
-  }
+  from { width: 0; }
+  to { width: 100%; }
 }
 
 @keyframes blink {
-  50% {
-    border-color: transparent;
-  }
-
-  100% {
-    border-color: transparent;
-
-  }
+  50% { border-color: transparent; }
 }
 
 
-
+/* ---------------------------
+   HEADER
+----------------------------*/
 .header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+
+/* ---------------------------
+   BUTTONS (Modern Blue)
+----------------------------*/
 .edit-btn,
 .save-btn {
-  background-color: #007bff;
+  background-color: #4A90E2;
   border: none;
   color: white;
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
+
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+
   cursor: pointer;
+  font-weight: 600;
+
+  transition: background-color 0.25s ease, transform 0.2s;
 }
 
 .edit-btn:hover,
 .save-btn:hover {
-  background-color: #0056b3;
+  background-color: #357ABD;
+  transform: translateY(-2px);
 }
 
-.user-details label {
-  font-weight: bold;
-  display: block;
-  margin-top: 0.6rem;
 
+/* ---------------------------
+   USER DETAILS
+----------------------------*/
+.user-details label {
+  font-weight: 600;
+  color: #4a1a2e;
+  display: block;
+  margin-top: 0.8rem;
 }
 
 .user-details p,
 .user-details input {
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 0.5rem;
+
   width: 100%;
-  padding: 0.4rem;
-  color: rgb(226, 38, 38)
+  padding: 0.5rem;
+
+  border: none;
+  border-radius: 6px;
+
+  background: rgba(255, 255, 255, 0.85);
+  color: #4a1a2e;
+
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
+
+/* ---------------------------
+   UPLOAD SECTION + MESSAGE
+----------------------------*/
 .upload-section {
   margin-top: 2rem;
 }
 
 .message {
   margin-top: 1rem;
-  color: green;
-  font-weight: 500;
+  color: #0f9b4c;
+  font-weight: 600;
 }
