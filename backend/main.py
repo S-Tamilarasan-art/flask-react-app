@@ -17,7 +17,8 @@ app = Flask(__name__)
 frontend_dev = os.getenv("FRONTEND_DEV_URL")
 frontend_prod = os.getenv("FRONTEND_PROD_URL")
 raw_url = os.getenv("MYSQL_PUBLIC_URL") 
-
+if raw_url.startswith("mysql://"):
+    raw_url = raw_url.replace("mysql://", "mysql+pymysql://", 1)
 
 print(raw_url)
 
