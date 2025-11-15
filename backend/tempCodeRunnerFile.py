@@ -32,7 +32,7 @@ with app.app_context():
     try:
         with db.engine.connect() as conn:
             r = conn.execute(text("SELECT DATABASE()"))
-            print("Connected to DB:", r.fetchone()[1])
+            print("Connected to DB:", r.fetchone()[0])
     except Exception as e:
         print("DB Connection Failed:", e)
 
