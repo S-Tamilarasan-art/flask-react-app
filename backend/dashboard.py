@@ -109,3 +109,19 @@ def upload_file():
 
     return jsonify({"message": "File uploaded successfully!"}), 200
  
+
+
+@dashboard_bp.route("/filedownload", methods=["GET"])
+def file_download_route():
+    email = request.args.get("email")   # <-- FIXED
+    print("email:",email)
+    if not email:
+        return jsonify({"error": "Email required"}), 400
+
+    user_folder = os.path.join(BASE_UPLOAD_PATH, email)
+
+    if not os.path.exists(user_folder):
+        return jsonify([]), 200
+
+    files = os.listdir(user_folder)
+    return jsonify(files), 200

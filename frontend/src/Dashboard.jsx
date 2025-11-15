@@ -6,12 +6,14 @@ function Dashboard() {
   const [editMode, setEditMode] = useState(false);
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
+  const [fileurl, setFileurl] = useState("");
   const email = localStorage.getItem("userEmail"); // from login
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   // Fetch user info when dashboard loads
   useEffect(() => {
     if (email) {
       fetchUserData(email);
+      filedownload(email);
     }
   }, [email]);
 
@@ -102,10 +104,19 @@ function Dashboard() {
     );
   }
 
+  async function filedownload() {
+    const res = await fetch(
+      `${backendUrl}/dashboard/filedownload?email=${encodeURIComponent(
+        userEmail
+      )}`
+    );
+    data = await res.json();
+    setFileurl(data);
+  }
+
   return (
     <div className="dashboard-container">
       <h1 className="typing">Welcome, {userData.name}!</h1>
-
       <div className="user-details">
         <div className="header-row">
           <h2>User Details</h2>
@@ -155,7 +166,6 @@ function Dashboard() {
           </button>
         )}
       </div>
-
       <div className="upload-section">
         <h3>Upload File</h3>
         <input
@@ -168,7 +178,9 @@ function Dashboard() {
           <p>Last uploaded: {userData.uploaded_file}</p>
         )}
       </div>
-
+      <div className="file-list">
+        <a href="fileurl">{fileurl}</a>
+      </div>
       {message && <p className="message">{message}</p>}
     </div>
   );

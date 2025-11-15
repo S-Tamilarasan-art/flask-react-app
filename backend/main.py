@@ -9,9 +9,16 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# CORS
 frontend_dev = os.getenv("FRONTEND_DEV_URL")
 frontend_prod = os.getenv("FRONTEND_PROD_URL")
+# CORS
+
+CORS(app, resources={
+    r"/signup/*": {"origins": [frontend_dev, frontend_prod]},
+    r"/login/*": {"origins": [frontend_dev, frontend_prod]},
+    r"/dashboard/*": {"origins": [frontend_dev, frontend_prod]},
+})
+
 
 # MYSQL URL FIX
 raw_url = os.getenv("MYSQL_PUBLIC_URL")
@@ -32,7 +39,7 @@ with app.app_context():
     try:
         with db.engine.connect() as conn:
             r = conn.execute(text("SELECT DATABASE()"))
-            print("Connected to DB:", r.fetchone()[1])
+            print("Connected to DB:", r.fetchone()[0])
     except Exception as e:
         print("DB Connection Failed:", e)
 
@@ -48,4 +55,4 @@ app.register_blueprint(dashboard_bp, url_prefix="/dashboard")
 # RUN
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port ,debug="True")
