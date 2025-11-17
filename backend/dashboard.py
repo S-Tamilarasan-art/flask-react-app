@@ -118,7 +118,7 @@ def file_download_route():
     if not email:
         return jsonify({"error": "Email required"}), 400
 
-    user_folder = os.path.join(BASE_UPLOAD_PATH, email)
+    user_folder = os.path.join(email)
 
     if not os.path.exists(user_folder):
         return jsonify([]), 200

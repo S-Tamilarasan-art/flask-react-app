@@ -23,7 +23,7 @@ def handle_signup():
     missing_fields = [field for field in required_fields if not data.get(field)]
 
     existing_user = User.query.filter(
-        (User.email == data['email']) | (User.mobile == data['mobile'])
+        User.email == data['email']
     ).first()
 
     if existing_user:

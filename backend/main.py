@@ -11,13 +11,18 @@ app = Flask(__name__)
 
 frontend_dev = os.getenv("FRONTEND_DEV_URL")
 frontend_prod = os.getenv("FRONTEND_PROD_URL")
+print(frontend_dev, frontend_prod)
 # CORS
 
 CORS(app, resources={
-    r"/signup/*": {"origins": [frontend_dev, frontend_prod]},
-    r"/login/*": {"origins": [frontend_dev, frontend_prod]},
-    r"/dashboard/*": {"origins": [frontend_dev, frontend_prod]},
+    r"/*": {
+        "origins": "*",    
+        "supports_credentials": False,   # Must be False when origins="*"
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }
 })
+
 
 
 # MYSQL URL FIX
@@ -29,7 +34,7 @@ if raw_url.startswith("mysql://"):
 print("DATABASE URL =>", raw_url)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = raw_url
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 # DB INIT
 db.init_app(app)
